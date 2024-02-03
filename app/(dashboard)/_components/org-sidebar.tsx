@@ -21,12 +21,17 @@ export default function OrgSidebar() {
           <Image
             src='/logo.svg'
             alt='Logo'
-            width={60}
-            height={60}
+            width={35}
+            height={35}
             className='cursor-pointer'
           />
-          <span className={cn('font-semibold text-2xl', font.className)}>
-            Board
+          <span
+            className={cn(
+              'font-semibold text-2xl text-[#FF630B]',
+              font.className
+            )}
+          >
+            Boards
           </span>
         </div>
       </Link>
