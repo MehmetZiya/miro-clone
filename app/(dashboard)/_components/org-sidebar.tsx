@@ -57,7 +57,7 @@ export default function OrgSidebar() {
           asChild
           variant={favorites ? 'ghost' : 'secondary'}
           size='lg'
-          className='font-normal justify-start px-2 mb-1'
+          className='font-normal justify-start px-2 mb-1 min-w-36'
         >
           <Link href='/'>
             <LayoutDashboard className='h-4 w-4 mr-2' />
@@ -68,7 +68,7 @@ export default function OrgSidebar() {
           asChild
           variant={favorites ? 'secondary' : 'ghost'}
           size='lg'
-          className='font-normal justify-start px-2'
+          className='font-normal justify-start px-2 min-w-36'
         >
           <Link
             href={{
