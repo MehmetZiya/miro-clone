@@ -36,6 +36,7 @@ export default function SearchInput() {
         placeholder='Search boards'
         className='w-full max-w-[516px] pl-9'
         onChange={handleChange}
+        id='search-input'
       />
     </div>
   )
