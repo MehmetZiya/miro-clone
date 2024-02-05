@@ -24,8 +24,6 @@ export const create = mutation({
     if (!identity) throw new Error('Not authenticated')
     const randomImage = images[Math.floor(Math.random() * images.length)]
 
-    console.log(randomImage, 'TEST')
-
     const board = await ctx.db.insert('boards', {
       title: args.title,
       orgId: args.orgId,
@@ -35,5 +33,18 @@ export const create = mutation({
     })
 
     return board
+  },
+})
+
+export const remove = mutation({
+  args: {
+    id: v.id('boards'),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity()
+    if (!identity) throw new Error('Not authenticated')
+
+    //Todo: check if the user is the author of the board
+    const board = await ctx.db.delete(args.id)
   },
 })
