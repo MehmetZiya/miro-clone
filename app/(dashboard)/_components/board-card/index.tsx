@@ -10,6 +10,9 @@ import { useAuth } from '@clerk/nextjs'
 import { MoreHorizontal } from 'lucide-react'
 import Footer from './footer'
 import Actions from '@/components/actions'
+import { useApiMutations } from '@/hooks/use-api-mutations'
+import { api } from '@/convex/_generated/api'
+import { toast } from 'sonner'
 
 interface BoardCardProps {
   id: string
@@ -35,6 +38,32 @@ export default function BoardCard({
   const { userId } = useAuth()
   const authorLabel = userId === authorId ? 'You' : authorName
   const timeAgo = formatDistanceToNow(createdAt, { addSuffix: true })
+
+  const { mutate: handleFavorite, pending: pendingFavorite } = useApiMutations(
+    api.board.favorite
+  )
+  const { mutate: handleUnfavorite, pending: pendingUnfavorite } =
+    useApiMutations(api.board.unfavorite)
+
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
+      handleUnfavorite({ id })
+        .then(() => {
+          toast.success('Board removed from favorite')
+        })
+        .catch(() => {
+          toast.error('Failed to unfavorite board')
+        })
+    } else {
+      handleFavorite({ id, orgId })
+        .then(() => {
+          toast.success('Board added to favorite')
+        })
+        .catch(() => {
+          toast.error('Failed to favorite board')
+        })
+    }
+  }
   return (
     <Link href={`/board/${id}`}>
       <div className='group aspect-[100/127] border rounded-lg flex flex-col justify-between overflow-hidden shadow-md'>
@@ -52,7 +81,8 @@ export default function BoardCard({
           authorLabel={authorLabel}
           timeAgo={timeAgo}
           isFavorite={isFavorite}
-          onClick={() => {}}
+          onClick={handleToggleFavorite}
+          disabled={pendingFavorite || pendingUnfavorite}
         />
       </div>
     </Link>
