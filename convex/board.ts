@@ -48,3 +48,21 @@ export const remove = mutation({
     const board = await ctx.db.delete(args.id)
   },
 })
+
+export const update = mutation({
+  args: {
+    id: v.id('boards'),
+    title: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity()
+    const title = args.title.trim()
+    if (!title) throw new Error('Title is required')
+    if (title.length > 15)
+      throw new Error('Title can not be longer than 15 characters')
+    if (!identity) throw new Error('Not authenticated')
+
+    const board = await ctx.db.patch(args.id, { title: args.title })
+    return board
+  },
+})

@@ -40,10 +40,10 @@ export default function ConfirmModal({
         </AlertDialogHeader>
         <AlertDialogDescription>{description}</AlertDialogDescription>
         <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={handleConfirm} disabled={disabled}>
             Confirm
           </AlertDialogAction>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
