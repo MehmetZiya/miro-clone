@@ -13,12 +13,12 @@ interface BoardListProps {
   orgId: string
   query: {
     search?: string
-    favorites?: boolean
+    favorites?: string
   }
 }
 
 export default function BoardList({ orgId, query }: BoardListProps) {
-  const data = useQuery(api.boards.get, { orgId })
+  const data = useQuery(api.boards.get, { orgId, ...query })
 
   if (data === undefined) {
     return (
