@@ -1,12 +1,15 @@
 'use client'
 
 import { useOthers, useSelf } from '@/liveblocks.config'
-import UserAvatar from './user-avatar'
 import { connectionIdToColor } from '@/lib/utils'
-
-const MAX_PARTICIPANTS = 4
+import UserAvatar from './user-avatar'
 
 export default function Participants() {
+  const MAX_PARTICIPANTS = 4
+  const users = useOthers()
+  const self = useSelf()
+  const hasMoreUsers = users.length > MAX_PARTICIPANTS
+
   return (
     <div className='absolute h-12 top-2 right-2 bg-white rounded-md p-3 flex items-center shadow-md'>
       <div className='flex gap-x-2'>
@@ -37,10 +40,6 @@ export default function Participants() {
     </div>
   )
 }
-  const users = useOthers()
-  const self = useSelf()
-  const hasMoreUsers = users.length > MAX_PARTICIPANTS
-
 
 export const ParticipantsSkeleton = () => {
   return (
