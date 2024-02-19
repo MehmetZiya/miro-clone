@@ -32,17 +32,12 @@ export default function Info({ boardId }: InfoProps) {
   }
   return (
     <div className='absolute top-2 left-2 bg-white rounded-md p-3 h-12 center shadow-md'>
-      <Button
-        asChild
-        variant='board'
-        className='px-2'
-        onClick={() => console.log('clicked')}
-      >
+      <Button asChild variant='board' className='px-2'>
         <Link href='/'>
           <Image src='/logo.svg' alt='Board logo' height={30} width={30} />
           <span
             className={cn(
-              'font-semibold text-xl ml-2 text-logo',
+              'font-semibold text-xl ml-2 text-logo text-[#FF630B]',
               font.className
             )}
           >
