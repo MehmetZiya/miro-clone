@@ -32,6 +32,7 @@ import {
 } from '@/lib/utils'
 import { nanoid } from 'nanoid'
 import { LiveObject } from '@liveblocks/client'
+import { SelectionTools } from './selection-tools'
 
 const MAX_LAYERS = 100
 interface CanvasProps {
@@ -238,6 +239,7 @@ export default function Canvas({ boardId }: CanvasProps) {
         canUndo={canUndo}
         canRedo={canRedo}
       />
+      <SelectionTools camera={camera} setLastUsedColor={setLastUsedColor} />
       <svg
         className='h-[100vh] w-[100vw]'
         onWheel={onWheel}
